@@ -1,0 +1,37 @@
+@import "compass/utilities/sprites";
+@import "compass/css3/background-size";
+
+//normal and retina
+//How to use : @include image-set($name);
+@mixin image-set($name) {
+    display: block;
+    height: image-height(sprite-file($sprites, $name));
+    width: image-width(sprite-file($sprites, $name));
+    background: sprite-url($sprites);
+    background-position: sprite-position($sprites, $name); //position 要在 background 后面
+    background-image: -webkit-image-set(sprite-url($sprites) 1x, sprite-url($sprites-x2) 2x);
+    background-image: -moz-image-set(sprite-url($sprites) 1x, sprite-url($sprites-x2) 2x);
+    background-image: -ms-image-set(sprite-url($sprites) 1x, sprite-url($sprites-x2) 2x);
+}
+
+$sprites: sprite-map("retina/items-icon/*.png", $layout: diagonal); // import 1x sprites
+$sprites-x2: sprite-map("retina/items-icon-2x/*.png", $layout: diagonal); // import 2x sprites
+
+
+
+
+//only retina
+//How to use : @include image-retina($name);
+@mixin image-retina($name) {
+    $pos: sprite-position($sprites-only-x2, $name);
+    height: image-height(sprite-file($sprites-only-x2, $name))/2;
+    width: image-width(sprite-file($sprites-only-x2, $name))/2;
+    background: sprite-url($sprites-only-x2) ;
+    @include background-size(ceil(image-width(sprite-path($sprites-only-x2)) / 2) auto);
+    background-position: nth($pos, 1) / 2 nth($pos, 2) / 2 ;
+}
+
+$sprites-only-x2: sprite-map("retina/items-icon-2x/*.png"); // import 2x sprites
+
+
+
