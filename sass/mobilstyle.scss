@@ -1,5 +1,12 @@
 @charset "UTF-8";
-@import "compass/reset", "compass/css3", "compass/utilities";
+@import "compass/utilities/sprites";
+@import "compass/css3/background-size";
+@import "normalize","compass/css3/box","compass/css3", "compass/utilities";
+
+
+
+$sprites-only-x2: sprite-map("retina/items-icon-2x/*.png");  // put before _retina-sprites.scss
+
 @import "mixin", "retina-sprites";
 
 //useful commond:
@@ -54,10 +61,12 @@ $darkgray: #333;
 *, *:after {
     box-sizing: border-box
 }
-
+ul, menu, dir{
+    padding: 0;
+}
 body {
     font-size: 0.75em;
-    font-family: "Microsoft YaHei", "黑体", "宋体"
+    font-family: Helvetica;
 }
 
 li {
@@ -74,6 +83,7 @@ a {
 html, body {
     position: relative;
     height: 100%;
+    color: #fff;
 }
 
 .swiper-container {
@@ -100,6 +110,46 @@ html, body {
     align-items: center;
 }
 
+.swiper-slide, .swiper-wrapper {
+    /*设置内嵌的元素在 3D 空间如何呈现：保留 3D*/
+    -webkit-transform-style: preserve-3d;
+    /*（设置进行转换的元素的背面在面对用户时是否可见：隐藏）*/
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+
+/* 判断横竖屏 */
+.landscape-tip-wrap{
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    background: #2e2e2e;
+    color: #fff;
+    z-index:1000;
+    display: none;
+}
+//横屏且小于1023，排除ipad，手机横屏则显示提示
+@media (max-width:1023px) and (orientation : landscape) {
+    .landscape-tip-wrap{
+        display: block;
+        font-size: 1.6em;
+        @include flex-column-align-center;
+        p{
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+    }
+}
+
+
+
+
 /* header */
 header {
     position: fixed;
@@ -111,11 +161,16 @@ header {
 }
 
 .head-logo {
-    width: 60px;
-    height: 20px;
-    background: image_url('logo.png') no-repeat;
+    width: 90px;
+    height: 30px;
+    background: image_url('retina/logox2.png') no-repeat;
     background-size: contain;
     float: left;
+}
+
+.start-sec {
+    background-color: #4b5d78;
+    background-size: contain
 }
 
 .first-sec {
@@ -143,6 +198,12 @@ header {
     background-size: contain
 }
 
+.sixth-sec {
+    background-color: #2e2e2e;
+    background-size: contain;
+}
+
+
 /* main-wrap */
 .main-wrap {
     position: relative;
@@ -162,7 +223,7 @@ header {
     position: relative;
     @extend %btn-download;
     @include transform(scale(0.5));
-    @include transition(all .5s cubic-bezier(0.165, .84, .44, 1));
+    @include transition(all .5s .5s cubic-bezier(0.165, .84, .44, 1));
     opacity: 0;
     display: inline-block;
     span {
@@ -203,6 +264,149 @@ h2 {
     margin-bottom: 20px;
 }
 
+/******************* S0 ******************/
+.S0-items1-outer {
+    padding: 0;
+    margin: 10px 0;
+    li {
+        padding: 3px 6px;
+        margin: 6px 0px;
+        border-radius: 5px;
+        opacity: 0;
+        @include transform(translate(0, -10px));
+        @include transition(all .4s linear);
+        &:nth-child(1){
+            @include transition-delay(.8s);
+        }
+        &:nth-child(2){
+            @include transition-delay(1.2s);
+        }
+        &:nth-child(3){
+            @include transition-delay(1.6s);
+        }
+        i {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        span {
+            display: inline-block;
+            font-size:1.6em;
+            color: #fff;
+            vertical-align: middle;
+        }
+    }
+}
+
+.S0-items2-outer {
+    padding: 0;
+    margin: 15px auto;
+    text-align: center;
+    li {
+        width: 40%;
+        display: inline-block;
+        font-size: 0;
+        padding: 6px 0;
+        margin: 4px 2%;
+        border-radius: 30px;
+        background-color: darken(#4b5d78,5%);
+        @include transform(perspective(100px) rotate3d(1,0,0,90deg));
+        @include transition(all .3s linear);
+        &:nth-child(1){
+            @include transition-delay(2s);
+        }
+        &:nth-child(2){
+            @include transition-delay(2.4s);
+        }
+        &:nth-child(3){
+            @include transition-delay(2.8s);
+        }
+        &:nth-child(4){
+            @include transition-delay(3.2s);
+        }
+        &:nth-child(5){
+            @include transition-delay(3.6s);
+        }
+        &:nth-child(6){
+            @include transition-delay(4s);
+        }
+        i {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        span {
+            display: inline-block;
+            font-size: 14px;
+            color: #fff;
+            vertical-align: middle;
+        }
+    }
+}
+
+.items-icon-8 {
+    @include image-retina(8);
+}
+.items-icon-phone {
+    @include image-retina(phone);
+}
+.items-icon-shangmen {
+    @include image-retina(shangmen);
+}
+.items-icon-red-packet {
+    @include image-retina(red-packet);
+}
+.items-icon-gift-bag {
+    @include image-retina(gift-bag);
+}
+.items-icon-fanli {
+    @include image-retina(fanli);
+}
+.items-icon-li {
+    @include image-retina(li);
+}
+.items-icon-free {
+    @include image-retina(free);
+}
+.items-icon-vip {
+    @include image-retina(vip);
+}
+
+#section0 {
+
+    p {
+        font-size: 14px;
+        
+    }
+}
+
+.bottom-text{
+    //position: absolute;
+    //bottom:25px;
+    text-align: center;
+    width: 100%;
+}
+
+.swiper-slide.swiper-slide-active{
+    .S0-items1-outer{
+        li{
+            opacity: 1;
+            @include transform(translate(0, 0));
+        }
+    }
+
+    .S0-items2-outer{
+        li{
+            @include transform(perspective(0px),rotate3d(1,0,0,45deg));
+        }
+    }
+}
+
+
 /********* s1 *************/
 .item-bg {
     width: 400px;
@@ -218,32 +422,36 @@ h2 {
 
 .phone-app {
     @extend %imgwrap;
-    width: 80px;
-    position: absolute;
-    top: 0px;
-    left: 20px;
+    width: 35%;
+    display: inline-block;
+    position: relative;
     opacity: 0;
+    z-index: 2;
     @include transform(translate(-300px, 0));
     @include transition(all .5s 1s cubic-bezier(0.165, .84, .44, 1));
 }
 
 .carton {
     @extend %imgwrap;
-    width: 50%;
     display: inline-block;
+    width: 80px;
+    position: absolute;
+    top: 60%;
+    left: 80%;
     margin-bottom: 10px;
+    z-index: 3;
     @include transform(scale(0));
-    @include transition(all .5s 1s cubic-bezier(0.165, .84, .44, 1));
+    @include transition(all .5s 1.5s cubic-bezier(0.165, .84, .44, 1));
 }
 
 .swiper-slide.swiper-slide-active {
 
     .item-bg {
-        @include animation(bounce 1s forwards, roundrotate 60s 1s infinite);
+        @include animation(bounce 1s forwards, roundrotate 70s 1s linear infinite);
     }
     .phone-app {
         opacity: 1;
-        @include transform(translate(10px, 0));
+        @include transform(translate(0, 0));
     }
     .carton {
         opacity: 1;
@@ -256,6 +464,7 @@ h2 {
 }
 
 /* s2 */
+
 .items-outer {
     @include legacy-pie-clearfix;
     padding: 0 15px 10px;
@@ -289,9 +498,12 @@ h2 {
 
         }
 
+
+
+
         .items-icon-xiyi {
-             @include image-retina(xiyi);
-         }
+            @include image-retina(xiyi);
+        }
 
         .items-icon-xixie {
             @include image-retina(xixie);
@@ -490,6 +702,59 @@ h2 {
     .page-down {
         @include animation(pagedown 1s 1s infinite ease-in-out);
     }
+}
+
+/* footer */
+footer {
+    color: #e7e7e7;
+    padding: 0px 20px 0;
+    //text-align: left;
+
+    .foot-text-link{
+        font-size: 1.2em;
+        color: #fff;
+        padding-bottom: 20px;
+        display: block;
+    }
+    .contact {
+        font-size: 1.2em;
+        padding-top: 6px;
+        line-height: 1.8em;
+        color: #9a9a9a;
+    }
+    .qr-wrap {
+        text-align: center;
+        padding: 0 0 20px;
+        li {
+            display: block;
+            margin: 0 20px;
+            text-align: center;
+            &:first-child{
+                margin-bottom: 6px;
+            }
+        }
+        img {
+            width: 110px;
+            height: 110px;
+            display:block;
+            margin: 0 auto;
+        }
+        span {
+            color: #c8c8c8;
+            font-size: 1em;
+            line-height: 30px;
+        }
+    }
+}
+
+.foot-copyright {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+    left:0;
+    text-align: center;
+    font-size: 1em;
+    color: #aaaaaa;
 }
 
 /*keyframes*/

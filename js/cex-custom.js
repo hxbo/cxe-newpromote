@@ -4,13 +4,13 @@ $(document).ready(function () {
     $('#pagepiling').pagepiling({
         menu: '#menu',
         anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
-        sectionsColor: ['#0a7fe9', '#4b5d78', '#28c18d', '#4b5d78', '#28c18d'],
+        sectionsColor: ['#4279be','#0a7fe9', '#4b5d78', '#28c18d', '#4b5d78', '#28c18d'],
         scrollingSpeed: 500,
         navigation: {
             'textColor': '#fff',
             'bulletsColor': '#fff',
             'position': 'right',
-            'tooltips': ['1', '2', '3', '4', '5']
+            'tooltips': ['1', '2', '3', '4', '5', '6']
         },
         onLeave: function (index, nextIndex, direction) {
             if (deleteLog) {
