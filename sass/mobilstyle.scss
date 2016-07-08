@@ -169,7 +169,7 @@ header {
 }
 
 .start-sec {
-    background-color: #4b5d78;
+    background-color: #4279be;
     background-size: contain
 }
 
@@ -311,7 +311,7 @@ h2 {
         padding: 6px 0;
         margin: 4px 2%;
         border-radius: 30px;
-        background-color: darken(#4b5d78,5%);
+        background-color: rgba(0,0,0,0.15);
         @include transform(perspective(100px) rotate3d(1,0,0,90deg));
         @include transition(all .3s linear);
         &:nth-child(1){
@@ -376,13 +376,7 @@ h2 {
     @include image-retina(vip);
 }
 
-#section0 {
 
-    p {
-        font-size: 14px;
-        
-    }
-}
 
 .bottom-text{
     //position: absolute;
@@ -391,12 +385,28 @@ h2 {
     width: 100%;
 }
 
+
+.start-sec {
+
+    h1 {
+        font-size: 2em;
+        @include transition(all .5s 4.5s cubic-bezier(0.165, .84, .44, 1));
+        @include transform(scale(3));
+        opacity: 0;
+    }
+}
+
 .swiper-slide.swiper-slide-active{
     .S0-items1-outer{
         li{
             opacity: 1;
             @include transform(translate(0, 0));
         }
+    }
+
+    &.start-sec h1 {
+        @include transform(scale(1));
+        opacity: 1;
     }
 
     .S0-items2-outer{
@@ -730,7 +740,9 @@ footer {
             margin: 0 20px;
             text-align: center;
             &:first-child{
-                margin-bottom: 6px;
+                margin-bottom: 10px;
+                font-size:1.4em;
+                font-weight: bold;;
             }
         }
         img {

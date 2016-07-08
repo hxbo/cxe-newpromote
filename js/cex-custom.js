@@ -3,7 +3,7 @@ var deleteLog = false;
 $(document).ready(function () {
     $('#pagepiling').pagepiling({
         menu: '#menu',
-        anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
+        anchors: ['page1', 'page2', 'page3', 'page4', 'page5','page6'],
         sectionsColor: ['#4279be','#0a7fe9', '#4b5d78', '#28c18d', '#4b5d78', '#28c18d'],
         scrollingSpeed: 500,
         navigation: {
@@ -86,6 +86,9 @@ $(document).ready(function () {
     });
 
 });
+
+
+
 
 
 
